@@ -1,0 +1,11 @@
+version: '3'
+ 
+services:
+  app:
+    build: . #vamos construir a imagem quando executarmos
+    entrypoint: ./.docker/entrypoint.sh # para executar assim como o RUN, outros comandos quando o container for executado
+    container_name: api-devshop
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app # fazendo bind do nosso / local com o workdir principal do container

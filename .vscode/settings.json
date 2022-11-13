@@ -1,0 +1,35 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.activeBorder": "#422c74",
+        "window.zoomLevel": 1,
+        "prettier.configPath": ".prettierrc.json",
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "editor.formatOnSave": true,
+        "editor.inlayHints.enabled": "on",
+        "editor.inlayHints.padding": true,
+        "javascript.inlayHints.parameterNames.enabled": "all",
+        "typescript.inlayHints.parameterNames.enabled": "all",
+        "workbench.colorCustomizations": {
+            "editorInlayHint.background": "#414141",
+            "editorInlayHint.foreground": "#b9b9b9"
+        },
+        "activityBar.activeBackground": "#36d278",
+        "activityBar.background": "#36d278",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#9663dc",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#36d278",
+        "statusBar.background": "#27ae60",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#36d278",
+        "statusBarItem.remoteBackground": "#27ae60",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#27ae60",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#27ae6099",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.remoteColor": "#27ae60"
+}

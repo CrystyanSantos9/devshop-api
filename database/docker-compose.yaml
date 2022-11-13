@@ -1,0 +1,22 @@
+version: "3.1"
+ 
+services:
+  db:
+    image: postgres
+    # restart: always
+    restart: on-failure
+    container_name: postgres
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+        POSTGRES_USER: admin
+        POSTGRES_PASSWORD: admin
+        POSTGRES_DB: devshop
+    ports:
+        - 5432:5432
+         
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
