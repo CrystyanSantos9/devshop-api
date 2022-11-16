@@ -36,7 +36,11 @@ export class ProductMapper {
     product.name = entity.name
     product.slug = entity.slug
     product.description = entity.description
-    product.category = entity.category.toString()
+    if (entity.category && entity.category.id) {
+      console.log(entity)
+      product.category = entity.category.id
+    }
+
     return product
   }
 }
