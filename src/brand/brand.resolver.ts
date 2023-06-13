@@ -41,4 +41,9 @@ export class BrandResolver {
   async deleteBrand(@Args('id') input: string): Promise<boolean> {
     return this.brandService.delete(input)
   }
+
+  @Mutation(returns => BrandPublic, { name: 'uploadBrandLogo' })
+  async uploadLogo(@Args('input') input: string): Promise<BrandPublic> {
+    return this.brandService.uploadLogo(input)
+  }
 }
