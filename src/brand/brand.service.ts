@@ -45,15 +45,20 @@ export class BrandService {
     return this.brandRepository.findOne({ where: [{ slug }] })
   }
 
-  async uploadLogo(input: string): Promise<Brand> {
-    const stream = fs.createReadStream('assets/logo.png')
+  async uploadLogo(
+    id: string,
+    createReadStream: () => any,
+    filename: string,
+    mimetype: string
+  ): Promise<Brand> {
+    const stream = createReadStream()
     console.log(Buffer.from(stream.toString()).toJSON())
     await this.s3.upload(
-      'test1.png',
+      filename,
       stream,
       'devshop-s3-crystyan',
-      'image/png',
-      'test1.png'
+      mimetype,
+      id + '-' + filename
     )
     return null
   }
