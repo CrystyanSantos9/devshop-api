@@ -17,4 +17,7 @@ export class BrandUpdateInput {
   @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
   @Validate(BrandSlugIsUnique)
   slug: string
+
+  @Field({ nullable: true })
+  logo: string
 }

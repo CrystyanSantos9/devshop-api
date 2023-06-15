@@ -25,6 +25,7 @@ export class BrandService {
   }
 
   async update(input: Brand): Promise<Brand> {
+    console.log(input)
     await this.brandRepository.update(input.id, {
       name: input.name,
       slug: input.slug

@@ -83,6 +83,7 @@ input BrandInputUpdate {
   id: String!
   name: String!
   slug: String!
+  logo: String
 }
 
 """The `Upload` scalar type represents a file upload."""

@@ -36,8 +36,10 @@ export class BrandResolver {
   async updateBrand(
     @Args('input') input: BrandUpdateInput
   ): Promise<BrandPublic> {
+    console.log('Valor de entrada no resolver ---->', input)
+    const inputtoentity = BrandMapper.toUpdateEntity(input)
     return BrandMapper.fromEntityToPublic(
-      await this.brandService.update(BrandMapper.toEntity(input))
+      await this.brandService.update(inputtoentity)
     )
   }
 
