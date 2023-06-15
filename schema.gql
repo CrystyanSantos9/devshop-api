@@ -20,6 +20,7 @@ type Brand {
   id: String
   name: String
   slug: String
+  logo: String
 }
 
 type Query {
