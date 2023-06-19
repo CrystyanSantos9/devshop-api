@@ -13,8 +13,7 @@ export class S3 {
   }
 
   async upload(
-    filename: string,
-    stream: any,
+    stream: NodeJS.ReadStream,
     bucket: string,
     mimetype: string,
     destinationFilename: string

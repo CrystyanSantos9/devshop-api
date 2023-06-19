@@ -4,6 +4,7 @@ import { Repository } from 'typeorm'
 import { Brand } from './entities/brand.entity'
 import { S3 } from 'src/utils/s3'
 import * as fs from 'fs'
+import * as sharp from 'sharp'
 
 @Injectable()
 export class BrandService {
@@ -52,10 +53,9 @@ export class BrandService {
     filename: string,
     mimetype: string
   ): Promise<boolean> {
-    const stream = createReadStream()
+    const stream = createReadStream().pipe(sharp().resize(300))
     console.log(Buffer.from(stream.toString()).toJSON())
     const logoUrl = await this.s3.upload(
-      filename,
       stream,
       'devshop-s3-crystyan',
       mimetype,
