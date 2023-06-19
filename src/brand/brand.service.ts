@@ -66,4 +66,11 @@ export class BrandService {
     })
     return true
   }
+
+  async removeBrandLogo(id: string): Promise<boolean> {
+    const brandExists = await this.brandRepository.findOne({ where: [{ id }] })
+    const fileDestinationName = brandExists.logo.split('.com/')[1]
+    await this.s3.deleteObject('devshop-s3-crystyan', fileDestinationName)
+    return true
+  }
 }

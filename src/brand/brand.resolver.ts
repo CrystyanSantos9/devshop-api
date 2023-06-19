@@ -62,4 +62,9 @@ export class BrandResolver {
       mimetype
     )
   }
+
+  @Mutation(returns => Boolean, { name: 'removeBrandLogo' })
+  async removeLogo(@Args('id') id: string): Promise<boolean> {
+    return await this.brandService.removeBrandLogo(id)
+  }
 }

@@ -21,13 +21,33 @@ export class S3 {
     const s3Params = {
       Bucket: bucket,
       Key: destinationFilename,
-      ACL: 'public-read',
+      ACL: 'public-read-write',
       ContentType: mimetype,
       Body: stream
     }
 
+    console.log(s3)
     const { Location } = await s3.upload(s3Params).promise()
     console.log(Location)
     return Location
+  }
+
+  async deleteObject(
+    bucket: string,
+    destinationFilename: string
+  ): Promise<boolean> {
+    const s3 = new aws.S3()
+    const s3Params = {
+      Bucket: bucket,
+      Key: destinationFilename
+    }
+    try {
+      console.log(s3Params)
+      await s3.deleteObject(s3Params).promise()
+      return true
+    } catch (err) {
+      console.log(err)
+      return false
+    }
   }
 }
