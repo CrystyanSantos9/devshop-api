@@ -6,9 +6,7 @@ export class S3 {
   constructor() {
     //credentials
     aws.config.update({
-      region: 'xxx',
-      accessKeyId: 'xxxx',
-      secretAccessKey: 'xxxxxx'
+      region: 'us-east-2'
     })
   }
 
