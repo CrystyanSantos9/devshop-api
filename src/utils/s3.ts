@@ -21,7 +21,7 @@ export class S3 {
     const s3Params = {
       Bucket: bucket,
       Key: destinationFilename,
-      ACL: 'public-read-write',
+      // ACL: 'public-read-write',
       ContentType: mimetype,
       Body: stream
     }
