@@ -43,7 +43,8 @@ export class S3 {
     }
     try {
       console.log(s3Params)
-      await s3.deleteObject(s3Params).promise()
+      const response = await s3.deleteObject(s3Params).promise()
+      console.log(response)
       return true
     } catch (err) {
       console.log(err)
