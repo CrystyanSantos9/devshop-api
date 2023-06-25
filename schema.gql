@@ -16,6 +16,20 @@ type Product {
   category: String
 }
 
+type Brand {
+  id: String
+  name: String
+  slug: String
+  logo: String
+}
+
+type User {
+  id: String
+  name: String
+  email: String
+  role: String
+}
+
 type Query {
   getAllCategories: [Category!]!
   getCategoryById(id: String!): Category!
@@ -23,6 +37,12 @@ type Query {
   getAllProducts: [Product!]!
   getProductById(id: String!): Product!
   getProductBySlug(slug: String!): Product!
+  getAllBrands: [Brand!]!
+  getBrandById(id: String!): Brand!
+  getBrandBySlug(slug: String!): Brand!
+  getAllUsers: [User!]!
+  getUserById(id: String!): User!
+  getUserByEmail(email: String!): User!
 }
 
 type Mutation {
@@ -32,6 +52,14 @@ type Mutation {
   createProduct(input: ProductInput!): Product!
   updateProduct(input: ProductUpdateInput!): Product!
   deleteProduct(id: String!): Boolean!
+  createBrand(input: BrandInput!): Brand!
+  updateBrand(input: BrandInputUpdate!): Brand!
+  deleteBrand(id: String!): Boolean!
+  uploadBrandLogo(id: String!, file: Upload!): Boolean!
+  removeBrandLogo(id: String!): Boolean!
+  createUser(input: UserInput!): User!
+  updateUser(input: UserInputUpdate!): User!
+  deleteUser(id: String!): Boolean!
 }
 
 input CategoryInput {
@@ -58,4 +86,34 @@ input ProductUpdateInput {
   description: String
   slug: String
   category: String
+}
+
+input BrandInput {
+  name: String!
+  slug: String!
+}
+
+input BrandInputUpdate {
+  id: String!
+  name: String!
+  slug: String!
+  logo: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input UserInput {
+  name: String!
+  email: String!
+  passwd: String!
+  role: String!
+}
+
+input UserInputUpdate {
+  id: String!
+  name: String!
+  email: String!
+  passwd: String!
+  role: String!
 }
