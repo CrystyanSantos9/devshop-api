@@ -58,7 +58,7 @@ type Mutation {
   uploadBrandLogo(id: String!, file: Upload!): Boolean!
   removeBrandLogo(id: String!): Boolean!
   createUser(input: UserInput!): User!
-  updateUser(input: UserInputUpdate!): User!
+  updateUser(input: UserUpdateInput!): User!
   deleteUser(id: String!): Boolean!
 }
 
@@ -110,7 +110,7 @@ input UserInput {
   role: String!
 }
 
-input UserInputUpdate {
+input UserUpdateInput {
   id: String!
   name: String!
   email: String!

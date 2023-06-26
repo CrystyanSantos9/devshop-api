@@ -2,7 +2,7 @@ import { Field, InputType } from '@nestjs/graphql'
 import { IsEmail, IsUUID, Length, Matches, Validate } from 'class-validator'
 import { UserEmailIsUnique } from '../validations/UserEmailIsUnique '
 
-@InputType('UserInputUpdate')
+@InputType('UserUpdateInput')
 export class UserUpdateInput {
   @Field()
   @IsUUID()
