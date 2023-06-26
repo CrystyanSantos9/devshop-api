@@ -4,9 +4,21 @@ import { UserResolver } from './user.resolver'
 import { UserService } from './user.service'
 import { User } from './entities/user.entity'
 import { UserEmailIsUnique } from './validations/UserEmailIsUnique '
+import { JwtModule } from '@nestjs/jwt'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    ConfigModule.forRoot({ isGlobal: true }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get('JWT_SECRET')
+      })
+    })
+  ],
   providers: [UserService, UserResolver, UserEmailIsUnique]
 })
 export class UserModule {}
