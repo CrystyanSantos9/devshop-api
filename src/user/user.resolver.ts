@@ -6,6 +6,7 @@ import { UserUpdateInput } from './dto/user-update.input'
 import { UserMapper } from './dto/user.mapper'
 import { JwtService } from '@nestjs/jwt'
 import { AuthToken } from './dto/auth'
+import { AuthUserInput } from './dto/auth-user.input'
 
 @Resolver(of => UserService)
 export class UserResolver {
@@ -45,18 +46,23 @@ export class UserResolver {
   }
 
   @Mutation(returns => AuthToken, { name: 'auth' })
-  async auth(@Args('id') input: string): Promise<AuthToken> {
-    const authToken = new AuthToken()
-    authToken.refreshToken = this.jwtService.sign({
-      scope: 'refreshToken',
-      id: '<id>'
-    })
+  async auth(@Args('input') input: AuthUserInput): Promise<AuthToken> {
+    const user = await this.userService.auth(input.email, input.passwd)
 
-    authToken.accessToken = this.jwtService.sign({
-      scope: 'accessToken',
-      id: '<id>'
-    })
+    if (user) {
+      const authToken = new AuthToken()
+      authToken.refreshToken = this.jwtService.sign({
+        scope: ['refreshToken'],
+        id: user.id
+      })
 
-    return authToken
+      authToken.accessToken = this.jwtService.sign({
+        scope: ['accessToken', user.role],
+        id: user.id
+      })
+      return authToken
+    } else {
+      throw new Error('User not exists')
+    }
   }
 }

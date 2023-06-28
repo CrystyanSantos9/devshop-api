@@ -48,4 +48,13 @@ export class UserService {
       return false
     }
   }
+
+  async auth(email: string, passwd: string): Promise<User> {
+    const userExists = await this.userRepository.findOne({ where: [{ email }] })
+    if (userExists && (await userExists.checkPassword(passwd))) {
+      return userExists
+    } else {
+      return null
+    }
+  }
 }

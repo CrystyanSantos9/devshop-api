@@ -50,4 +50,18 @@ export class User {
   setUpdatedDate(): void {
     this.updatedAt = new Date()
   }
+
+  async checkPassword(passwd: string): Promise<boolean> {
+    console.log(
+      '\u001b[35mSenha no banco: ' +
+        this.passwd +
+        '\u001b' +
+        '\u001b[34mSenha recebida: ' +
+        passwd +
+        '\u001b[m'
+    )
+    const isOk = await bcrypt.compare(passwd, this.passwd)
+    console.log(isOk)
+    return isOk
+  }
 }
