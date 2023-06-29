@@ -1,7 +1,7 @@
 {
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#422c74",
-        "window.zoomLevel": 1,
+        "window.zoomLevel": 0.5,
         "prettier.configPath": ".prettierrc.json",
         "typescript.tsdk": "node_modules/typescript/lib",
         "editor.formatOnSave": true,
@@ -29,7 +29,8 @@
         "titleBar.activeBackground": "#27ae60",
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#27ae6099",
-        "titleBar.inactiveForeground": "#e7e7e799"
+        "titleBar.inactiveForeground": "#e7e7e799",
+        "editor.fontSize": 12
     },
     "peacock.remoteColor": "#27ae60"
 }

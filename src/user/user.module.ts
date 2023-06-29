@@ -6,10 +6,11 @@ import { User } from './entities/user.entity'
 import { UserEmailIsUnique } from './validations/UserEmailIsUnique '
 import { JwtModule } from '@nestjs/jwt'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { AuthToken } from './entities/authtoken.entity'
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, AuthToken]),
     ConfigModule.forRoot({ isGlobal: true }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
