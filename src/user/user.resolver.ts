@@ -78,4 +78,34 @@ export class UserResolver {
       throw new Error('User not exists')
     }
   }
+
+  @Mutation(returns => String, { name: 'accessToken' })
+  async accessToken(
+    @Args('refreshToken') refreshToken: string
+  ): Promise<string> {
+    const refreshTokenDecoded = await this.jwtService.verify(refreshToken)
+    // console.log(refreshTokenDecoded)
+    if (
+      refreshTokenDecoded &&
+      refreshTokenDecoded.scope.indexOf('refreshToken') >= 0
+    ) {
+      // vai o processo de geração do token
+      const authToken = await this.userService.getRefreshToken(
+        refreshTokenDecoded.id
+      )
+      if (authToken) {
+        const newAccessToken = this.jwtService.sign(
+          {
+            scope: ['accessToken', authToken.user.role],
+            id: authToken.user.id
+          },
+          {
+            expiresIn: '1 hours'
+          }
+        )
+        return newAccessToken
+      }
+    }
+    return null
+  }
 }

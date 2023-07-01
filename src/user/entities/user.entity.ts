@@ -3,6 +3,7 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn
 } from 'typeorm'
@@ -35,7 +36,7 @@ export class User {
   @Column({ type: 'timestamp', nullable: true })
   updatedAt: Date
 
-  @OneToMany(() => AuthToken, authToken => authToken.user)
+  @OneToMany(type => AuthToken, authToken => authToken.user)
   authTokens: AuthToken[]
 
   @BeforeInsert()

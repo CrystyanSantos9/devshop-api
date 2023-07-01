@@ -64,4 +64,14 @@ export class UserService {
       return null
     }
   }
+
+  async getRefreshToken(id: string): Promise<AuthToken> {
+    console.log(id)
+    return this.authTokenRepository.findOne({
+      where: { id },
+      relations: {
+        user: true
+      }
+    })
+  }
 }
