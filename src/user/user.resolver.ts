@@ -7,6 +7,9 @@ import { UserMapper } from './dto/user.mapper'
 import { JwtService } from '@nestjs/jwt'
 import { AuthToken } from './dto/auth'
 import { AuthUserInput } from './dto/auth-user.input'
+import { AuthGuard } from 'src/utils/jwt-auth.guard'
+import { UseGuards } from '@nestjs/common'
+import { AuthUserId } from 'src/utils/jwt-user.decorator'
 
 @Resolver(of => UserService)
 export class UserResolver {
@@ -107,5 +110,11 @@ export class UserResolver {
       }
     }
     return null
+  }
+
+  @UseGuards(AuthGuard)
+  @Query(returns => UserPublic, { name: 'getMe' })
+  async getMe(@AuthUserId() id: string): Promise<UserPublic> {
+    return await this.userService.findById(id)
   }
 }
