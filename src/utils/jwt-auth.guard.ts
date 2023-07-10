@@ -12,7 +12,11 @@ export class AuthGuard implements CanActivate {
     const ctx = GqlExecutionContext.create(context)
     const { req } = ctx.getContext()
     //Bearer Token = split(): [Bearer, token] --> get pos[1y]
-    if (req.headers && req.headers.authorization.split(' ')[1]) {
+    if (
+      req.headers &&
+      req.headers.authorization &&
+      req.headers.authorization.split(' ')[1]
+    ) {
       const accessToken = req.headers.authorization.split(' ')[1]
       try {
         const payload = this.jwtService.verify(accessToken)
