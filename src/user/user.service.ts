@@ -61,7 +61,7 @@ export class UserService {
       console.log(token)
       return [userExists, authToken]
     } else {
-      return null
+      return [null, null]
     }
   }
 

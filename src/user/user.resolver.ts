@@ -78,7 +78,7 @@ export class UserResolver {
       )
       return authToken
     } else {
-      throw new Error('User not exists')
+      throw new Error('Bad Credentials')
     }
   }
 
