@@ -16,6 +16,17 @@ export class UserService {
     return this.userRepository.find()
   }
 
+  async findAllUserSessions(id: string): Promise<AuthToken[]> {
+    console.log('Id recebido no service', id)
+    const result = await this.authTokenRepository.find({
+      where: { user: { id } }
+    })
+
+    console.log('Dados encontrados ', result)
+
+    return result
+  }
+
   async findById(id: string): Promise<User> {
     return await this.userRepository.findOne({ where: { id: id } })
   }

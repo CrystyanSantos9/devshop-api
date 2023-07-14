@@ -10,6 +10,7 @@ import { AuthUserInput } from './dto/auth-user.input'
 import { AuthGuard } from 'src/utils/jwt-auth.guard'
 import { UseGuards } from '@nestjs/common'
 import { AuthUserId } from 'src/utils/jwt-user.decorator'
+import { AuthSession } from './dto/auth-session'
 
 @Resolver(of => UserService)
 export class UserResolver {
@@ -20,8 +21,14 @@ export class UserResolver {
 
   @UseGuards(AuthGuard)
   @Query(returns => [UserPublic], { name: 'panelGetAllUsers' })
-  async getAllCategories(): Promise<UserPublic[]> {
+  async getAllUsers(): Promise<UserPublic[]> {
     return this.userService.findAll()
+  }
+
+  @UseGuards(AuthGuard)
+  @Query(returns => [UserPublic], { name: 'panelGetAllUserSessions' })
+  async getAllUserSessions(@Args('id') id: string): Promise<AuthSession[]> {
+    return this.userService.findAllUserSessions(id)
   }
 
   @UseGuards(AuthGuard)
@@ -33,6 +40,7 @@ export class UserResolver {
   @UseGuards(AuthGuard)
   @Query(returns => UserPublic, { name: 'panelGetUserByEmail' })
   async getUserByEmail(@Args('email') email: string): Promise<UserPublic> {
+    console.log('Email recebido', email)
     return await this.userService.findByEmail(email)
   }
 
@@ -45,6 +53,7 @@ export class UserResolver {
   @UseGuards(AuthGuard)
   @Mutation(returns => UserPublic, { name: 'panelUpdateUser' })
   async updateUser(@Args('input') input: UserUpdateInput): Promise<UserPublic> {
+    console.log('Atualizando na api', input)
     return this.userService.update(UserMapper.toUpdateEntity(input))
   }
 

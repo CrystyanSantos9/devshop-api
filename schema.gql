@@ -46,6 +46,7 @@ type Query {
   getBrandById(id: String!): Brand!
   getBrandBySlug(slug: String!): Brand!
   panelGetAllUsers: [User!]!
+  panelGetAllUserSessions(id: String!): [User!]!
   panelGetUserById(id: String!): User!
   panelGetUserByEmail(email: String!): User!
   panelGetMe: User!
