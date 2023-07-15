@@ -16,6 +16,36 @@ type Product {
   category: String
 }
 
+type Brand {
+  id: String
+  name: String
+  slug: String
+  logo: String
+}
+
+type User {
+  id: String
+  name: String
+  email: String
+  role: String
+}
+
+type AuthToken {
+  accessToken: String!
+  refreshToken: String!
+}
+
+type AuthSession {
+  id: String!
+  userAgent: String
+  lastUsedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   getAllCategories: [Category!]!
   getCategoryById(id: String!): Category!
@@ -23,15 +53,33 @@ type Query {
   getAllProducts: [Product!]!
   getProductById(id: String!): Product!
   getProductBySlug(slug: String!): Product!
+  getAllBrands: [Brand!]!
+  getBrandById(id: String!): Brand!
+  getBrandBySlug(slug: String!): Brand!
+  panelGetAllUsers: [User!]!
+  panelGetAllUserSessions(id: String!): [AuthSession!]!
+  panelGetUserById(id: String!): User!
+  panelGetUserByEmail(email: String!): User!
+  panelGetMe: User!
 }
 
 type Mutation {
-  createCategory(input: CategoryInput!): Category!
-  updateCategory(input: CategoryInputUpdate!): Category!
-  deleteCategory(id: String!): Boolean!
-  createProduct(input: ProductInput!): Product!
-  updateProduct(input: ProductUpdateInput!): Product!
-  deleteProduct(id: String!): Boolean!
+  panelCreateCategory(input: CategoryInput!): Category!
+  panelUpdateCategory(input: CategoryInputUpdate!): Category!
+  panelDeleteCategory(id: String!): Boolean!
+  panelCreateProduct(input: ProductInput!): Product!
+  panelUpdateProduct(input: ProductUpdateInput!): Product!
+  panelDeleteProduct(id: String!): Boolean!
+  panelCreateBrand(input: BrandInput!): Brand!
+  panelUpdateBrand(input: BrandInputUpdate!): Brand!
+  panelDeleteBrand(id: String!): Boolean!
+  panelUploadBrandLogo(id: String!, file: Upload!): Boolean!
+  panelRemoveBrandLogo(id: String!): Boolean!
+  panelCreateUser(input: UserInput!): User!
+  panelUpdateUser(input: UserUpdateInput!): User!
+  panelDeleteUser(id: String!): Boolean!
+  auth(input: AuthUserInput!): AuthToken!
+  accessToken(refreshToken: String!): String!
 }
 
 input CategoryInput {
@@ -58,4 +106,39 @@ input ProductUpdateInput {
   description: String
   slug: String
   category: String
+}
+
+input BrandInput {
+  name: String!
+  slug: String!
+}
+
+input BrandInputUpdate {
+  id: String!
+  name: String!
+  slug: String!
+  logo: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input UserInput {
+  name: String!
+  email: String!
+  passwd: String!
+  role: String!
+}
+
+input UserUpdateInput {
+  id: String!
+  name: String!
+  email: String!
+  passwd: String!
+  role: String!
+}
+
+input AuthUserInput {
+  email: String!
+  passwd: String!
 }
