@@ -39,6 +39,7 @@ type AuthSession {
   id: String!
   userAgent: String
   lastUsedAt: DateTime
+  active: Boolean
 }
 
 """
@@ -80,6 +81,7 @@ type Mutation {
   panelDeleteUser(id: String!): Boolean!
   auth(input: AuthUserInput!): AuthToken!
   accessToken(refreshToken: String!): String!
+  panelInvalidateUserSession(id: String!): Boolean!
 }
 
 input CategoryInput {

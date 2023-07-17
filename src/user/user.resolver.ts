@@ -36,6 +36,7 @@ export class UserResolver {
   @UseGuards(AuthGuard)
   @Query(returns => [AuthSession], { name: 'panelGetAllUserSessions' })
   async getAllUserSessions(@Args('id') id: string): Promise<AuthSession[]> {
+    console.log('User session ---->>>> ', id)
     return this.userService.findAllUserSessions(id)
   }
 
@@ -143,5 +144,12 @@ export class UserResolver {
   @Query(returns => UserPublic, { name: 'panelGetMe' })
   async getMe(@AuthUserId() id: string): Promise<UserPublic> {
     return await this.userService.findById(id)
+  }
+
+  @UseGuards(AuthGuard)
+  @Mutation(returns => Boolean, { name: 'panelInvalidateUserSession' })
+  async invalidateUserSession(@Args('id') id: string): Promise<boolean> {
+    console.log('Id resolver', id)
+    return await this.userService.invalidateRefreshToken(id)
   }
 }

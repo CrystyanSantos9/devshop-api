@@ -78,15 +78,27 @@ export class UserService {
   }
 
   async getRefreshToken(id: string): Promise<AuthToken> {
-    // console.log(id)
     const refreshToken = await this.authTokenRepository.findOne({
-      where: { id },
+      where: { id, active: true },
       relations: {
         user: true
       }
     })
+    console.log('AuthToken ---> ', refreshToken)
     refreshToken.lastUsedAt = new Date()
     await this.authTokenRepository.save(refreshToken)
     return refreshToken
+  }
+
+  async invalidateRefreshToken(id: string): Promise<boolean> {
+    const refreshToken = await this.authTokenRepository.findOne({
+      where: [{ id }],
+      relations: {
+        user: false
+      }
+    })
+    refreshToken.active = false
+    await this.authTokenRepository.save(refreshToken)
+    return true
   }
 }
