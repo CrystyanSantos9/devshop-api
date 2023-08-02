@@ -1,6 +1,14 @@
 import { Category } from 'src/category/entities/category.entity'
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
+interface ProductVariation {
+  optionName1: string
+  optionName2: string
+  sku: string
+  price: number
+  weight: number
+}
+
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn('uuid')
@@ -17,4 +25,10 @@ export class Product {
 
   @ManyToOne(type => Category, category => category.id)
   category: Category
+
+  @Column({ type: 'jsonb', nullable: true })
+  optionNames: string[]
+
+  @Column({ type: 'jsonb', nullable: true })
+  variations: ProductVariation[]
 }

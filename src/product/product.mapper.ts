@@ -10,9 +10,27 @@ export class ProductMapper {
     entity.name = input.name
     entity.description = input.description
     entity.slug = input.slug
+
     const category = new Category()
     category.id = input.category
     entity.category = category
+    entity.optionNames = ['cor', 'tamanho']
+    entity.variations = [
+      {
+        optionName1: 'vermelho',
+        optionName2: 'P',
+        sku: 'p1',
+        price: 10,
+        weight: 0.5
+      },
+      {
+        optionName1: 'azul',
+        optionName2: 'P',
+        sku: 'p1',
+        price: 10,
+        weight: 0.5
+      }
+    ]
 
     return entity
   }

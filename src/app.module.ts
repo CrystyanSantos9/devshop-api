@@ -7,6 +7,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ProductModule } from './product/product.module'
+import { BrandModule } from './brand/brand.module'
+import { UserModule } from './user/user.module'
+import { CoreModule } from './core/core.module'
 
 @Module({
   imports: [
@@ -22,6 +25,7 @@ import { ProductModule } from './product/product.module'
         logging: true
       })
     }),
+    CoreModule,
     // TypeOrmModule.forRoot({
     //   type: 'postgres',
     //   url: process.env.POSTGRES_DSN,
@@ -31,11 +35,14 @@ import { ProductModule } from './product/product.module'
     //   logging: true
     // }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
+      context: ({ req, res }) => ({ req, res }),
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql'
     }),
     CategoryModule,
-    ProductModule
+    ProductModule,
+    BrandModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService]

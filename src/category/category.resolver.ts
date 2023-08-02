@@ -4,6 +4,8 @@ import { CategoryPublic } from './dto/category'
 import { CategoryCreateInput } from './dto/category-create.input'
 import { CategoryUpdateInput } from './dto/category-update.input'
 import { CategoryMapper } from './dto/category.mapper'
+import { UseGuards } from '@nestjs/common'
+import { AuthGuard } from 'src/utils/jwt-auth.guard'
 
 @Resolver(of => CategoryPublic)
 export class CategoryResolver {
@@ -23,21 +25,24 @@ export class CategoryResolver {
     return await this.categoryService.findBySlug(slug)
   }
 
-  @Mutation(returns => CategoryPublic, { name: 'createCategory' })
+  @UseGuards(AuthGuard)
+  @Mutation(returns => CategoryPublic, { name: 'panelCreateCategory' })
   async createCategory(
     @Args('input') input: CategoryCreateInput
   ): Promise<CategoryPublic> {
     return this.categoryService.create(CategoryMapper.toEntity(input))
   }
 
-  @Mutation(returns => CategoryPublic, { name: 'updateCategory' })
+  @UseGuards(AuthGuard)
+  @Mutation(returns => CategoryPublic, { name: 'panelUpdateCategory' })
   async updateCategory(
     @Args('input') input: CategoryUpdateInput
   ): Promise<CategoryPublic> {
     return this.categoryService.update(input)
   }
 
-  @Mutation(returns => Boolean, { name: 'deleteCategory' })
+  @UseGuards(AuthGuard)
+  @Mutation(returns => Boolean, { name: 'panelDeleteCategory' })
   async deleteCategory(@Args('id') input: string): Promise<boolean> {
     return this.categoryService.delete(input)
   }
