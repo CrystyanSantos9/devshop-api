@@ -31,4 +31,13 @@ export class Product {
 
   @Column({ type: 'jsonb', nullable: true })
   variations: ProductVariation[]
+
+  @Column({ length: 250, nullable: true })
+  sku: string
+
+  @Column({ nullable: true })
+  prince: number
+
+  @Column({ nullable: true })
+  weight: number
 }

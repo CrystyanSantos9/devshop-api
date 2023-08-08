@@ -14,6 +14,11 @@ export class ProductMapper {
     const category = new Category()
     category.id = input.category
     entity.category = category
+
+    entity.sku = input.sku
+    entity.prince = input.price
+    entity.weight = input.weight
+
     entity.optionNames = ['cor', 'tamanho']
     entity.variations = [
       {
