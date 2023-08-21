@@ -103,6 +103,7 @@ input ProductInput {
   sku: String
   price: Float
   weight: Float
+  optionNames: [String!]
 }
 
 input ProductUpdateInput {

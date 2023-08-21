@@ -30,4 +30,7 @@ export class ProductCreateInput {
 
   @Field(type => Float, { nullable: true })
   weight: number
+
+  @Field(type => [String], { nullable: true })
+  optionNames: string[]
 }
