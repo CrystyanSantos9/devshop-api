@@ -32,5 +32,6 @@
         "titleBar.inactiveForeground": "#e7e7e799",
         "editor.fontSize": 8
     },
+    "editor.lineHeight": 11,
     "peacock.remoteColor": "#27ae60"
 }
